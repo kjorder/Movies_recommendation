@@ -22,11 +22,11 @@ movies = load_data()
 similarity = build_model(movies['overview'])
 
 st.title("🎬 TMDB Film Tavsiya Tizimi")
-movie_list = movies['title'].dropna().unique()
+movie_list = movies['original_title'].dropna().unique()
 selected_movie = st.selectbox("Film nomini tanlang:", movie_list)
 
 def recommend(movie_title, top_n=5):
-    idx = movies[movies['title'] == movie_title].index[0]
+    idx = movies[movies['original_title'] == movie_title].index[0]
     scores = list(enumerate(similarity[idx]))
     scores = sorted(scores, key=lambda x: x[1], reverse=True)[1:top_n+1]
     rec_titles = movies.iloc[[i[0] for i in scores]]['title'].tolist()
