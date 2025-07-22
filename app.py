@@ -29,7 +29,7 @@ def recommend(movie_title, top_n=5):
     idx = movies[movies['original_title'] == movie_title].index[0]
     scores = list(enumerate(similarity[idx]))
     scores = sorted(scores, key=lambda x: x[1], reverse=True)[1:top_n+1]
-    rec_titles = movies.iloc[[i[0] for i in scores]]['title'].tolist()
+    rec_titles = movies.iloc[[i[0] for i in scores]]['original_title'].tolist()
     return rec_titles
 
 if st.button("Tavsiya ber"):
